@@ -20,11 +20,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomToolbar: UIToolbar!
     
     // MARK: - Instance Objects
-    struct Meme {
-        var image, meme: UIImage?
-        var topText, bottomText: String?
-    }
-    
     let impactTextAttributes: [String: Any] = [
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
@@ -37,37 +32,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         shareButton.isEnabled = false
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+        subscribeToKeyboardNotifications()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do I need the self before?
-        self.bottomTextField.defaultTextAttributes = impactTextAttributes
-        self.topTextField.defaultTextAttributes = impactTextAttributes
-        
-        self.bottomTextField.textAlignment = .center
-        self.topTextField.textAlignment = .center
-        
-        self.bottomTextField.delegate = self
-        self.topTextField.delegate = self
+        configureTextField(textField: self.bottomTextField, withAlignment: .center, andDefaultAttributes: impactTextAttributes)
+        configureTextField(textField: self.topTextField, withAlignment: .center, andDefaultAttributes: impactTextAttributes)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-        
+        unsubscribeToKeyboardNotifications()
     }
     
     // MARK: - Actions
     @IBAction func shareMeme(_ sender: Any) {
-        checkReadyToShare()
-        let shareSheet = UIActivityViewController(activityItems: [self.meme.meme!], applicationActivities: nil)
+        let completeMeme = generateMemedImage()
+        let shareSheet = UIActivityViewController(activityItems: [completeMeme], applicationActivities: nil)
+        shareSheet.completionWithItemsHandler = {
+            (_,successful,_,_) in
+            self.saveMeme(meme: completeMeme)
+        }
         present(shareSheet, animated: true, completion: nil)
     }
     
@@ -78,25 +67,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareFromCamera(_ sender: Any) {
-        let cameraPicker = UIImagePickerController()
-        cameraPicker.delegate = self
-        cameraPicker.sourceType = .camera
-        present(cameraPicker, animated: true, completion: nil)
+        presentImagePickerWith(sourceType: .camera)
     }
     
     @IBAction func shareFromAlbum(_ sender: Any) {
-        let albumPicker = UIImagePickerController()
-        albumPicker.delegate = self
-        albumPicker.sourceType = .photoLibrary
-        albumPicker.modalPresentationStyle = .overCurrentContext
-        present(albumPicker, animated: true, completion: nil)
+        presentImagePickerWith(sourceType: .photoLibrary)
     }
     
     // MARK: - ImagePicker Delegate Functions
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
-            self.meme.image = image
             checkReadyToShare()
         }
         dismiss(animated: true, completion: nil)
@@ -112,13 +93,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // Need to find out what text field just finished and assing the value to the struct, or just set the values of both
-        if let string: String = topTextField.text {
-            self.meme.topText = string
-        }
-        if let string: String = bottomTextField.text {
-            self.meme.bottomText = string
-        }
         checkReadyToShare()
     }
     
@@ -134,39 +108,68 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillHide(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
+            if self.view.frame.origin.y != 0 && bottomTextField.isEditing {
                 self.view.frame.origin.y += keyboardSize.height
             }
         }
     }
+    
     // MARK: - Kitchen Sink
     func checkReadyToShare() {
         // have to check for "" strings not nil
-        if let top: String = self.meme.topText, let bottom: String = self.meme.bottomText, let _: UIImage = self.meme.image {
+        if let top: String = topTextField.text, let bottom: String = bottomTextField.text, let _: UIImage = memeImageView.image {
             if top != "" && bottom != "" {
-                self.meme.meme = generateMemedImage()
                 self.shareButton.isEnabled = true
             } else { self.shareButton.isEnabled = false }
         } else { self.shareButton.isEnabled = false }
     }
     
     func generateMemedImage() -> UIImage {
-        
         // Render view to an image
-        self.topToolbar.isHidden = true
-        self.bottomToolbar.isHidden = true
+        configureToolbars(hidden: true)
         UIGraphicsBeginImageContext(self.view.bounds.size)
         view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        self.topToolbar.isHidden = false
-        self.bottomToolbar.isHidden = false
+        configureToolbars(hidden: false)
         
         return memedImage
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    //TODO: Create a function that moves the texts within the bounds of the imaged
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func unsubscribeToKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    func configureTextField(textField: UITextField, withAlignment alignment: NSTextAlignment, andDefaultAttributes defaultAttributes: [String: Any]) {
+        textField.defaultTextAttributes = defaultAttributes
+        textField.textAlignment = alignment
+        textField.delegate = self
+    }
+    
+    func saveMeme(meme: UIImage) {
+        self.meme = Meme(image: memeImageView.image, meme: meme, topText: topTextField.text, bottomText: bottomTextField.text)
+    }
+    
+    func presentImagePickerWith(sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func configureToolbars(hidden: Bool) {
+        self.topToolbar.isHidden = hidden
+        self.bottomToolbar.isHidden = hidden
+    }
     
 }
 

@@ -12,6 +12,7 @@
 		5DCBDD891F46B83200EA8FBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCBDD871F46B83200EA8FBA /* Main.storyboard */; };
 		5DCBDD8B1F46B83200EA8FBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DCBDD8A1F46B83200EA8FBA /* Assets.xcassets */; };
 		5DCBDD8E1F46B83200EA8FBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DCBDD8C1F46B83200EA8FBA /* LaunchScreen.storyboard */; };
+		5DCBDD961F47910300EA8FBA /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DCBDD951F47910300EA8FBA /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		5DCBDD8A1F46B83200EA8FBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DCBDD8D1F46B83200EA8FBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DCBDD8F1F46B83200EA8FBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5DCBDD951F47910300EA8FBA /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				5DCBDD8A1F46B83200EA8FBA /* Assets.xcassets */,
 				5DCBDD8C1F46B83200EA8FBA /* LaunchScreen.storyboard */,
 				5DCBDD8F1F46B83200EA8FBA /* Info.plist */,
+				5DCBDD951F47910300EA8FBA /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DCBDD961F47910300EA8FBA /* Meme.swift in Sources */,
 				5DCBDD861F46B83200EA8FBA /* ViewController.swift in Sources */,
 				5DCBDD841F46B83200EA8FBA /* AppDelegate.swift in Sources */,
 			);
@@ -302,6 +306,7 @@
 				5DCBDD941F46B83200EA8FBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
