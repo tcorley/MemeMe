@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rS4-or-bsz">
-                                <rect key="frame" x="0.0" y="20" width="667" height="355"/>
+                                <rect key="frame" x="0.0" y="64" width="667" height="267"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBC-J2-yKP">
                                 <rect key="frame" x="0.0" y="331" width="667" height="44"/>
@@ -43,6 +43,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="f2w-Ux-ZtW"/>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="BOTTOM TEXT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-0b-XeB">
+                                <rect key="frame" x="20" y="284" width="627" height="21"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNA-S5-7GB">
                                 <rect key="frame" x="0.0" y="20" width="667" height="44"/>
                                 <items>
@@ -60,44 +65,33 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="TOP TEXT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2G-jr-DrQ">
-                                <rect key="frame" x="20" y="71" width="627" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="s7g-tO-8Ls"/>
-                                </constraints>
-                                <attributedString key="attributedText"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="BOTTOM TEXT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-0b-XeB">
-                                <rect key="frame" x="20" y="250" width="627" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="ITE-de-reN"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="89" width="627" height="21"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rS4-or-bsz" firstAttribute="leading" secondItem="tNA-S5-7GB" secondAttribute="leading" id="5RL-Eq-lLL"/>
-                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="top" secondItem="tNA-S5-7GB" secondAttribute="bottom" constant="60" id="7EK-1K-a4q">
-                                <variation key="heightClass=compact" constant="7"/>
+                            <constraint firstItem="hBC-J2-yKP" firstAttribute="top" secondItem="VaV-0b-XeB" secondAttribute="bottom" constant="96" id="1Zn-xF-EGl">
+                                <variation key="heightClass=compact" constant="26"/>
                             </constraint>
-                            <constraint firstItem="rS4-or-bsz" firstAttribute="trailing" secondItem="hBC-J2-yKP" secondAttribute="trailing" id="7cw-P3-yei"/>
-                            <constraint firstItem="tNA-S5-7GB" firstAttribute="trailing" secondItem="hBC-J2-yKP" secondAttribute="trailing" id="9sO-bA-Xw2"/>
-                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="M7x-WV-Cpx"/>
-                            <constraint firstItem="hBC-J2-yKP" firstAttribute="top" secondItem="VaV-0b-XeB" secondAttribute="bottom" constant="96" id="NZy-Af-hfN">
-                                <variation key="heightClass=compact" constant="21"/>
+                            <constraint firstAttribute="trailing" secondItem="rS4-or-bsz" secondAttribute="trailing" id="2Sy-cI-SDJ"/>
+                            <constraint firstAttribute="trailing" secondItem="hBC-J2-yKP" secondAttribute="trailing" id="3oI-VZ-4vd"/>
+                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7T7-lp-DUz"/>
+                            <constraint firstItem="tNA-S5-7GB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9Br-WR-XD4"/>
+                            <constraint firstItem="rS4-or-bsz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GWo-2y-cBs"/>
+                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Nqx-60-GEo"/>
+                            <constraint firstItem="VaV-0b-XeB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="YO8-9E-4eQ"/>
+                            <constraint firstItem="tNA-S5-7GB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="c3W-fH-T85"/>
+                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="top" secondItem="tNA-S5-7GB" secondAttribute="bottom" constant="60" id="jSa-gu-oOj">
+                                <variation key="heightClass=compact" constant="25"/>
                             </constraint>
-                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="leading" secondItem="VaV-0b-XeB" secondAttribute="leading" id="QfH-kr-vEh"/>
-                            <constraint firstItem="hBC-J2-yKP" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="SLm-NI-sVx"/>
-                            <constraint firstItem="rS4-or-bsz" firstAttribute="leading" secondItem="hBC-J2-yKP" secondAttribute="leading" id="Ucg-og-Zdm"/>
-                            <constraint firstItem="n2G-jr-DrQ" firstAttribute="trailing" secondItem="VaV-0b-XeB" secondAttribute="trailing" id="WqY-OA-LcH"/>
-                            <constraint firstItem="tNA-S5-7GB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aAf-hZ-LxQ"/>
-                            <constraint firstAttribute="trailing" secondItem="rS4-or-bsz" secondAttribute="trailing" id="aFC-ce-YCg"/>
-                            <constraint firstItem="rS4-or-bsz" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="bgD-mj-Xef"/>
-                            <constraint firstItem="tNA-S5-7GB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fkr-G7-BVC"/>
-                            <constraint firstItem="tNA-S5-7GB" firstAttribute="centerX" secondItem="n2G-jr-DrQ" secondAttribute="centerX" id="sfM-qq-s9j"/>
-                            <constraint firstItem="rS4-or-bsz" firstAttribute="top" secondItem="tNA-S5-7GB" secondAttribute="top" id="wFh-kn-pJY"/>
+                            <constraint firstAttribute="trailing" secondItem="tNA-S5-7GB" secondAttribute="trailing" id="kiA-WA-aoK"/>
+                            <constraint firstItem="rS4-or-bsz" firstAttribute="top" secondItem="tNA-S5-7GB" secondAttribute="bottom" id="nnq-3b-dRd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hBC-J2-yKP" secondAttribute="bottom" id="qGv-H4-xBt"/>
+                            <constraint firstItem="hBC-J2-yKP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qtN-Gs-HGu"/>
+                            <constraint firstItem="VaV-0b-XeB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="rKc-sN-cgv"/>
+                            <constraint firstItem="hBC-J2-yKP" firstAttribute="top" secondItem="rS4-or-bsz" secondAttribute="bottom" id="zdy-Hk-qcg"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

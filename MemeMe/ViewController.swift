@@ -100,7 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // FIXME: bottom content will move up, but the top tool bar, top text, and image will float back into position??
     func keyboardWillShow(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 && bottomTextField.isEditing {
+            if self.view.frame.origin.y == 0 && bottomTextField.isFirstResponder {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
@@ -108,7 +108,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillHide(_ notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0 && bottomTextField.isEditing {
+            if self.view.frame.origin.y != 0 && bottomTextField.isFirstResponder {
                 self.view.frame.origin.y += keyboardSize.height
             }
         }
