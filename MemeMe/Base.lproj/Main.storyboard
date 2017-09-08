@@ -57,6 +57,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ni7-5O-WOC"/>
+                                    <barButtonItem title="Clear" id="qzj-ZC-NPH">
+                                        <connections>
+                                            <action selector="clearMeme:" destination="BYZ-38-t0r" id="sKd-H8-UW0"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="cancel" id="WbB-Mt-XfD">
                                         <connections>
                                             <action selector="cancelMeme:" destination="BYZ-38-t0r" id="wma-5u-ThX"/>
@@ -99,6 +104,7 @@
                         <outlet property="bottomTextField" destination="VaV-0b-XeB" id="xsj-sj-Mlz"/>
                         <outlet property="bottomToolbar" destination="hBC-J2-yKP" id="TgY-zZ-gpo"/>
                         <outlet property="cameraButton" destination="yN8-Gi-fHA" id="3ds-CE-tBm"/>
+                        <outlet property="clearButton" destination="qzj-ZC-NPH" id="Eg0-pp-VqU"/>
                         <outlet property="memeImageView" destination="rS4-or-bsz" id="vmF-wv-oJQ"/>
                         <outlet property="shareButton" destination="rdc-lL-PKD" id="6gO-hG-d5y"/>
                         <outlet property="topTextField" destination="n2G-jr-DrQ" id="mBh-HI-R9c"/>

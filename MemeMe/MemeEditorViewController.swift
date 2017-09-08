@@ -16,6 +16,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     
@@ -35,6 +36,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIApplication.shared.statusBarStyle = .lightContent
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         shareButton.isEnabled = false
+        clearButton.isEnabled = false
         subscribeToKeyboardNotifications()
     }
     
@@ -61,9 +63,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancelMeme(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func clearMeme(_ sender: Any) {
         (self.meme.topText, self.meme.bottomText, self.meme.image, self.meme.meme) = (nil, nil, nil, nil)
         (self.topTextField.text, self.bottomTextField.text, self.memeImageView.image) = (nil, nil, nil)
         self.shareButton.isEnabled = false
+        self.clearButton.isEnabled = false
     }
     
     @IBAction func shareFromCamera(_ sender: Any) {
@@ -122,6 +129,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 self.shareButton.isEnabled = true
             } else { self.shareButton.isEnabled = false }
         } else { self.shareButton.isEnabled = false }
+        if topTextField.hasText || bottomTextField.hasText || memeImageView.image != nil {
+            self.clearButton.isEnabled = true
+        }
     }
     
     func generateMemedImage() -> UIImage {
