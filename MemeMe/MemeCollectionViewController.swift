@@ -15,7 +15,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.setNeedsStatusBarAppearanceUpdate()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         collectionView?.reloadData()
@@ -24,6 +24,10 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return false
     }
     
     // MARK: - Collection View Delegates

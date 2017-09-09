@@ -14,8 +14,14 @@ class DetailViewController: UIViewController {
     var meme: Meme?
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setNeedsStatusBarAppearanceUpdate()
         if let meme = meme?.meme {
             memeImageView.image = meme
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return false
     }
 }
