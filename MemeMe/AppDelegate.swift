@@ -12,9 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    // for testing
-    var memes = testMemes
-//    var memes = [Meme]()
+    // uncomment for table/collection testing
+//    var memes = testMemes
+    var memes = [Meme]()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

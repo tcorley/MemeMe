@@ -12,6 +12,7 @@ import UIKit
 class MemeCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var memes = [Meme]()
     
+    // MARK: - Life Cycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -20,6 +21,12 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         collectionView?.reloadData()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    // MARK: - Collection View Delegates
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -31,7 +38,9 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "memeCell", for: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.row]
-        cell.imageView.image = meme.meme
+        cell.imageView.image = meme.image
+        cell.topText.text = meme.topText
+        cell.bottomText.text = meme.bottomText
         
         return cell
     }
@@ -44,10 +53,10 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     
-    //MARK - Flow Layout
+    // MARK: - Flow Layout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let widthPerItem = view.frame.width / 3
+        let widthPerItem = view.frame.width / (UIDevice.current.orientation.isPortrait ? 3 : 5)
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
@@ -55,6 +64,11 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // MARK: - Actions
     @IBAction func goToEditMeme(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let editMemeVC = storyboard.instantiateViewController(withIdentifier: "MemeEditorViewController")

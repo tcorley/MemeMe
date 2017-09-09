@@ -137,14 +137,14 @@
                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TOP TEXT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="aLH-s9-u9B">
-                                            <rect key="frame" x="166" y="20" width="176" height="21"/>
+                                            <rect key="frame" x="166" y="35" width="176" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BOTTOM TEXT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="cBI-Zj-eEG">
-                                            <rect key="frame" x="166" y="94" width="176" height="21"/>
+                                            <rect key="frame" x="166" y="79" width="176" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
@@ -251,16 +251,50 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ME4-s8-qON">
                                             <rect key="frame" x="0.0" y="0.0" width="156" height="151"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qG4-ou-c6U">
+                                            <rect key="frame" x="10" y="9" width="136" height="12"/>
+                                            <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.54773116438356162" colorSpace="calibratedRGB"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="TOP TEXT">
+                                                    <attributes>
+                                                        <font key="NSFont" size="10" name=".AppleSystemUIFont"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rq-yp-AJn">
+                                            <rect key="frame" x="10" y="130" width="136" height="12"/>
+                                            <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.55107555650684936" colorSpace="calibratedRGB"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="BOTTOM TEXT">
+                                                    <attributes>
+                                                        <font key="NSFont" size="10" name=".AppleSystemUIFont"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ME4-s8-qON" secondAttribute="bottom" id="EYM-kW-q7c"/>
+                                    <constraint firstItem="qG4-ou-c6U" firstAttribute="leading" secondItem="Skb-Wb-kM7" secondAttribute="leadingMargin" constant="2" id="PFr-0N-XEL"/>
+                                    <constraint firstItem="3rq-yp-AJn" firstAttribute="leading" secondItem="Skb-Wb-kM7" secondAttribute="leadingMargin" constant="2" id="QFY-r0-Sut"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="3rq-yp-AJn" secondAttribute="bottom" constant="1" id="QKy-Dj-aPc"/>
                                     <constraint firstAttribute="trailing" secondItem="ME4-s8-qON" secondAttribute="trailing" id="a2m-WN-J0E"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="qG4-ou-c6U" secondAttribute="trailing" constant="2" id="cLF-IS-sCD"/>
                                     <constraint firstItem="ME4-s8-qON" firstAttribute="top" secondItem="Skb-Wb-kM7" secondAttribute="top" id="tfc-ps-tbd"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="3rq-yp-AJn" secondAttribute="trailing" constant="2" id="y8x-JN-yYp"/>
                                     <constraint firstItem="ME4-s8-qON" firstAttribute="leading" secondItem="Skb-Wb-kM7" secondAttribute="leading" id="yA9-4r-fII"/>
+                                    <constraint firstItem="qG4-ou-c6U" firstAttribute="top" secondItem="Skb-Wb-kM7" secondAttribute="topMargin" constant="1" id="zYL-ie-gAj"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="bottomText" destination="3rq-yp-AJn" id="tku-eZ-NaB"/>
                                     <outlet property="imageView" destination="ME4-s8-qON" id="dMx-kc-ij2"/>
+                                    <outlet property="topText" destination="qG4-ou-c6U" id="R8r-bk-IBK"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
